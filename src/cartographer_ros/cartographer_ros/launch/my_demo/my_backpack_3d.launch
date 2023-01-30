@@ -1,0 +1,22 @@
+
+<launch>
+  <!--把哨兵各个部件的相对位置注册到参数服务器-->
+  <param name="robot_description" textfile="$(find cartographer_ros)/urdf/my_mid360_3d.urdf" />
+
+  <!--发布link之间的tf消息-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!--启动定位节点-->
+  <node name="cartographer_node" pkg="cartographer_ros"
+      type="cartographer_node" args="
+          -configuration_directory $(find cartographer_ros)/configuration_files/my_configuration
+          -configuration_basename my_backpack_3d.lua"
+      output="screen">
+    <remap from="points2" to="/livox/lidar" />
+    <remap from="imu" to="/livox/imu" />
+  </node>
+  
+  <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+ 
+</launch>

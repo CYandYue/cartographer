@@ -1,0 +1,11 @@
+<!--mid360 的尝试-->
+
+<launch>
+
+  <include file="$(find cartographer_ros)/launch/my_demo/my_backpack_3d.launch"/>
+
+  <!--打开 rviz-->
+  <node name="rviz" pkg="rviz" type="rviz" required="true"
+      args="-d $(find cartographer_ros)/configuration_files/demo_3d.rviz" />
+
+</launch>

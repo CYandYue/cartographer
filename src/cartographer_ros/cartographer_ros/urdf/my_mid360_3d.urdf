@@ -1,0 +1,46 @@
+<robot name="sentry">
+  <!--首先定义两个 material类型 -->
+  <material name="orange">
+    <color rgba="1.0 0.5 0.2 0.5" />
+  </material>
+  <material name="gray">
+    <color rgba="0.2 0.2 0.2 0.5" />
+  </material>
+
+  <!--模型-->
+  <link name="base_link" />
+
+  <!-- <link name="imu_link" >
+    <visual>
+      <orgin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.01 0.01 0.01" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link> -->
+
+  <link name="livox_frame">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.08" radius="0.03"/> <!--暂定的雷达尺寸-->
+      </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+  <!--固连-->
+  <joint name="livox_frame_2_base_link" type="fixed">
+    <parent link="base_link" />
+    <child link="livox_frame" />
+    <origin xyz="0.2 0.0 0.0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- <joint name="imu_2_base_link" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="0.211 0.0233 -0.04412" rpy="0 0 0"/>
+  </joint> -->
+
+</robot>
